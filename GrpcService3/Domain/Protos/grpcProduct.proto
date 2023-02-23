@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService3.Domain.Protos";
+
+package grpcProduct;
+
+// The greeting service definition.
+service GrpcProduct {
+  // Sends a greeting
+  rpc SayHello (request) returns (response);
+  rpc GetAll(ParamPaging) returns (ListDataProduct);
+  rpc GetById(idRequest) returns (DataProduct);
+  rpc UpdateInventory(orderProductRequest) returns(BaseResponse);
+  rpc UpdateProduct(DataProduct) returns(BaseResponse);
+  rpc AddProduct(DataProduct) returns(BaseResponse);
+  rpc DeleteProduct(idRequest) returns(BaseResponse);
+}
+//get all product
+
+message DataProduct{
+    string Id = 1;
+    string Name = 2;
+    string CategoryId = 3;
+    int32 Inventory = 4;
+}
+message ListDataProduct {
+    repeated DataProduct products=1;
+}
+message ParamPaging {
+    int32 pageIndex=1;
+    int32 pageSize =2;
+}
+// The request message containing the user's name.
+// The request message containing the user's name.
+message request {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message response {
+  string message = 1;
+}
+//
+message idRequest {
+  string Id = 1;
+}
+//update Inventory
+message orderProductRequest {
+  string Id = 1;
+  int32 Quantity =2;
+}
+//base response
+message BaseResponse {
+  bool status = 1;
+}

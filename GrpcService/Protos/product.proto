@@ -1,0 +1,28 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcService.Protos";
+
+package product;
+
+service Product {
+	rpc GetProductsInformation(GetProductDetail) returns(ProductModel);
+	rpc ListProduct(GetProductDetail)  returns (ListOfListsOfStrings);
+}
+
+message GetProductDetails {
+  int32 name = 1;
+}
+
+message GetProductDetail{
+	int32 productId = 1;
+}
+message ListOfListsOfStrings {
+    repeated ProductModel product=1;
+}
+message ProductModel{
+	string productName = 1;
+	string productDescription = 2;
+	int32 productPrice = 3;
+	int32 productStock = 4;
+}
+
